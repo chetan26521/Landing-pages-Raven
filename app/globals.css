@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Raven Labs Brand Tokens
+   Load first, before any component styles.
+   Aligned with raven-brand-guidelines.
+   ============================================================ */
+
+:root {
+  /* Brand Colors */
+  --rl-purple-1: #4a00e1;
+  --rl-purple-2: #6400E1;
+  --rl-purple-3: #7900E1;
+  --rl-purple-4: #8300e2;
+
+  /* Neutrals */
+  --rl-white: #ffffff;
+  --rl-black: #000000;
+  --rl-gray-50: #fafafa;
+  --rl-gray-100: #f4f4f5;
+  --rl-gray-200: #e4e4e7;
+  --rl-gray-400: #a1a1aa;
+  --rl-gray-600: #52525b;
+  --rl-gray-800: #27272a;
+  --rl-gray-900: #18181b;
+
+  /* Semantic */
+  --rl-bg: var(--rl-white);
+  --rl-bg-alt: var(--rl-gray-50);
+  --rl-fg: var(--rl-gray-900);
+  --rl-fg-muted: var(--rl-gray-600);
+  --rl-accent: var(--rl-purple-1);
+  --rl-accent-hover: var(--rl-purple-3);
+  --rl-border: var(--rl-gray-200);
+
+  /* Gradient */
+  --rl-gradient: linear-gradient(
+    135deg,
+    var(--rl-purple-1) 0%,
+    var(--rl-purple-2) 33%,
+    var(--rl-purple-3) 66%,
+    var(--rl-purple-4) 100%
+  );
+
+  /* Typography */
+  --rl-font-display: 'Poppins', 'Quicksand', system-ui, -apple-system, sans-serif;
+  --rl-font-body: 'Poppins', system-ui, -apple-system, sans-serif;
+  --rl-font-report: Arial, Helvetica, sans-serif; /* per brand guide, reports/emails only */
+
+  /* Type scale — mobile-first, matches even-sizes rule for campaigns (26/20/14/12pt) */
+  --rl-text-xs: 0.75rem;    /* 12px */
+  --rl-text-sm: 0.875rem;   /* 14px */
+  --rl-text-base: 1rem;     /* 16px — mobile body baseline, prevents iOS zoom */
+  --rl-text-lg: 1.125rem;   /* 18px */
+  --rl-text-xl: 1.25rem;    /* 20px */
+  --rl-text-2xl: 1.5rem;    /* 24px */
+  --rl-text-3xl: 1.875rem;  /* 30px */
+  --rl-text-4xl: 2.25rem;   /* 36px */
+  --rl-text-5xl: 3rem;      /* 48px — hero desktop */
+  --rl-text-6xl: 3.75rem;   /* 60px — oversized hero */
+
+  /* Line heights */
+  --rl-leading-tight: 1.15;
+  --rl-leading-snug: 1.35;
+  --rl-leading-normal: 1.6;
+
+  /* Spacing scale */
+  --rl-space-1: 0.25rem;
+  --rl-space-2: 0.5rem;
+  --rl-space-3: 0.75rem;
+  --rl-space-4: 1rem;
+  --rl-space-6: 1.5rem;
+  --rl-space-8: 2rem;
+  --rl-space-12: 3rem;
+  --rl-space-16: 4rem;
+  --rl-space-20: 5rem;
+  --rl-space-24: 6rem;
+
+  /* Radii */
+  --rl-radius-sm: 4px;
+  --rl-radius-md: 8px;
+  --rl-radius-lg: 16px;
+  --rl-radius-full: 9999px;
+
+  /* Shadows */
+  --rl-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --rl-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --rl-shadow-lg: 0 12px 32px rgba(74, 0, 225, 0.15);
+
+  /* Container */
+  --rl-container-max: 1200px;
+  --rl-container-narrow: 720px;
+
+  /* Motion */
+  --rl-transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset — minimal, mobile-first */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--rl-font-body);
+  font-size: var(--rl-text-base);
+  line-height: var(--rl-leading-normal);
+  color: var(--rl-fg);
+  background: var(--rl-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, svg, video { display: block; max-width: 100%; height: auto; }
+
+/* Focus visible — accessibility */
+:focus-visible {
+  outline: 3px solid var(--rl-purple-2);
+  outline-offset: 2px;
+  border-radius: var(--rl-radius-sm);
+}
+
+/* Prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==== Utility classes commonly used in landing pages ==== */
+
+.rl-container {
+  width: 100%;
+  max-width: var(--rl-container-max);
+  margin-inline: auto;
+  padding-inline: var(--rl-space-4);
+}
+
+.rl-container-narrow {
+  max-width: var(--rl-container-narrow);
+  margin-inline: auto;
+  padding-inline: var(--rl-space-4);
+}
+
+.rl-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--rl-space-2);
+  min-height: 48px;
+  padding: var(--rl-space-3) var(--rl-space-6);
+  background: var(--rl-accent);
+  color: var(--rl-white);
+  font-family: var(--rl-font-display);
+  font-weight: 600;
+  font-size: var(--rl-text-lg);
+  border: none;
+  border-radius: var(--rl-radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--rl-transition), transform var(--rl-transition);
+  box-shadow: var(--rl-shadow-md);
+}
+
+.rl-btn-primary:hover {
+  background: var(--rl-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--rl-shadow-lg);
+}
+
+.rl-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: var(--rl-space-3) var(--rl-space-6);
+  background: transparent;
+  color: var(--rl-accent);
+  border: 2px solid var(--rl-accent);
+  border-radius: var(--rl-radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--rl-transition), color var(--rl-transition);
+}
+
+.rl-btn-secondary:hover {
+  background: var(--rl-accent);
+  color: var(--rl-white);
+}
+
+.rl-h1 {
+  font-family: var(--rl-font-display);
+  font-weight: 700;
+  font-size: clamp(var(--rl-text-3xl), 6vw, var(--rl-text-5xl));
+  line-height: var(--rl-leading-tight);
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--rl-space-4);
+}
+
+.rl-h2 {
+  font-family: var(--rl-font-display);
+  font-weight: 700;
+  font-size: clamp(var(--rl-text-2xl), 4vw, var(--rl-text-4xl));
+  line-height: var(--rl-leading-tight);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--rl-space-4);
+}
+
+.rl-h3 {
+  font-family: var(--rl-font-display);
+  font-weight: 600;
+  font-size: clamp(var(--rl-text-xl), 3vw, var(--rl-text-2xl));
+  line-height: var(--rl-leading-snug);
+  margin: 0 0 var(--rl-space-3);
+}
+
+.rl-lead {
+  font-size: clamp(var(--rl-text-lg), 2.2vw, var(--rl-text-xl));
+  color: var(--rl-fg-muted);
+  line-height: var(--rl-leading-snug);
+  margin: 0 0 var(--rl-space-6);
+}
+
+.rl-gradient-bg {
+  background: var(--rl-gradient);
+  color: var(--rl-white);
+}
+
+.rl-section {
+  padding-block: var(--rl-space-16);
+}
+@media (min-width: 768px) {
+  .rl-section { padding-block: var(--rl-space-24); }
+}
