@@ -13,6 +13,7 @@ import Image from 'next/image'
 import Script from 'next/script'
 import { submitLead } from '@/lib/submit-lead'
 import EventTracking from '@/components/EventTracking'
+import NabersDashboardMock from '@/components/NabersDashboardMock'
 
 export const metadata: Metadata = {
   title: 'Live NABERS Rating Tracking | Fulqrom by Raven Labs',
@@ -168,17 +169,11 @@ export default function NabersRatingTrackingPage() {
                 <span className="text-sm opacity-85">15 minutes. No obligation. See your live rating first.</span>
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-2xl bg-white/10 border border-white/20">
-              <Image
-                src="/hero-dashboard.png"
-                alt="Fulqrom dashboard showing a live NABERS star rating trend for a commercial office building"
-                width={600}
-                height={450}
-                priority
-                className="w-full h-auto"
-              />
-              {/* [[PLACEHOLDER IMAGE]] — replace hero-dashboard.png with a real Fulqrom
-                  product screenshot before launch. Never ship a generic stock photo here. */}
+            <div className="rounded-2xl overflow-hidden shadow-2xl bg-white/10 border border-white/20 p-2">
+              <NabersDashboardMock />
+              {/* This is a stylised on-brand mockup, not a real product screenshot.
+                  [[RECOMMENDED]] — swap for an actual Fulqrom dashboard screenshot once
+                  one is available; real product UI converts better than any mockup. */}
             </div>
           </div>
         </section>
@@ -233,23 +228,32 @@ export default function NabersRatingTrackingPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
+                  icon: 'M12 2v4m0 12v4m10-10h-4M6 12H2m15.36-6.36l-2.83 2.83M9.47 14.53l-2.83 2.83m0-10.6l2.83 2.83m5.06 5.06l2.83 2.83',
                   title: 'Live star rating, not a snapshot',
                   body: 'See your NABERS rating trend month to month, not just once a year at assessment time.',
                 },
                 {
+                  icon: 'M9 17V9m3 8V5m3 12v-4M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z',
                   title: 'No manual bill-chasing',
                   body: 'Fulqrom pulls consumption data automatically from meters, BMS, and retailers — no spreadsheets.',
                 },
                 {
+                  icon: 'M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zM12 15.75h.007v.008H12v-.008z',
                   title: 'Early-warning alerts',
                   body: 'Get notified the moment consumption trends put your rating at risk, with time to act.',
                 },
                 {
+                  icon: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
                   title: 'Audit-ready evidence',
                   body: 'Hand your accredited assessor, tenants, and investors clean, continuous data on demand.',
                 },
               ].map((b, i) => (
                 <div key={i} className="p-8 bg-white rounded-2xl shadow-sm">
+                  <div className="w-11 h-11 rounded-xl bg-raven-purple/10 grid place-items-center mb-4">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#4a00e1" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
+                      <path d={b.icon} />
+                    </svg>
+                  </div>
                   <h3 className="font-display text-xl font-semibold mb-2">{b.title}</h3>
                   <p className="text-gray-600">{b.body}</p>
                 </div>
