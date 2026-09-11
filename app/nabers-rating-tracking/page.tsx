@@ -9,7 +9,6 @@
  */
 
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Script from 'next/script'
 import { submitLead } from '@/lib/submit-lead'
 import EventTracking from '@/components/EventTracking'
@@ -131,7 +130,8 @@ export default function NabersRatingTrackingPage() {
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <a href="https://theravenlabs.com" target="_blank" rel="noopener" aria-label="Raven Labs home">
-            <Image src="/logos/raven-labs-wordmark.svg" alt="Raven Labs" width={140} height={32} priority />
+            {/* eslint-disable-next-line @next/next/no-img-element -- plain <img> for SVGs; next/image's optimizer 400s on SVG sources */}
+            <img src="/logos/raven-labs-wordmark.svg" alt="Raven Labs" width={140} height={32} />
           </a>
           <a
             href="#final-cta"
@@ -185,7 +185,8 @@ export default function NabersRatingTrackingPage() {
               Built by Raven Labs — Authorised Zoho Partner
             </p>
             <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-              <Image src="/logos/fulqrom-badge.svg" alt="Fulqrom" width={120} height={36} className="opacity-90" />
+              {/* eslint-disable-next-line @next/next/no-img-element -- plain <img> for SVGs; next/image's optimizer 400s on SVG sources */}
+              <img src="/logos/fulqrom-badge.svg" alt="Fulqrom" width={120} height={36} className="opacity-90" />
               {/* [[PLACEHOLDER]] — add real, permitted client logos once approved by Nav.
                   Never display a client logo without explicit permission. */}
             </div>
@@ -509,7 +510,8 @@ export default function NabersRatingTrackingPage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-[2fr_1fr_1fr] gap-8 mb-8">
             <div>
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element -- plain <img> for SVGs; next/image's optimizer 400s on SVG sources */}
+              <img
                 src="/logos/raven-labs-wordmark-white.svg"
                 alt="Raven Labs"
                 width={140}
