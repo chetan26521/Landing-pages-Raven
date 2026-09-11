@@ -22,7 +22,7 @@ sign-off before spending budget on it.
 | Deployment | Vercel, standalone subdomain `nabers-rating.theravenlabs.com` | You chose Vercel — matches the skill's rule of thumb (cold PPC traffic → Vercel) |
 | Proof assets | **None available** — all stats/testimonials are `[[PLACEHOLDER]]` blocks | No approved case study, testimonial, or hard number was supplied. Per the skill's non-negotiables, nothing was invented. This is the single biggest gap before launch — see Section 7 |
 | ABN / phone / email / physical address | `[[PLACEHOLDER]]` in the footer and schema | Not supplied. Required by Google Ads' "Adequate Information" policy — the ad **will be disapproved** without these |
-| Brand assets (logo files) | Text-only SVG wordmark stand-ins in `public/logos/` | `https://brand-treasure-chest.lovable.app` and `theravenlabs.com` were both unreachable from this session (network egress policy blocks arbitrary external sites). Brand **colours, fonts, and voice** came from the already-installed `raven-brand-guidelines` skill instead, which matches this session's Company Context exactly (`#4a00e1` primary, Poppins/Quicksand, direct/authoritative tone) — so copy and styling should be correct. The actual logo artwork could not be fetched and must be swapped in manually (see Section 4) |
+| Brand assets (logo file) | **Resolved** — real logo now in use, `public/logos/raven-labs-logo.png` | Uploaded directly to the branch and wired into the header + footer (see Section 4). `brand-treasure-chest.lovable.app` and `theravenlabs.com` were unreachable from this session (network egress policy), so brand **colours, fonts, and voice** still came from the already-installed `raven-brand-guidelines` skill — matches this session's Company Context exactly (`#4a00e1` primary, Poppins/Quicksand, direct/authoritative tone) |
 | Hero image | Placeholder path `/hero-dashboard.png` (not supplied) | Skill rule: never ship a generic stock photo. A real Fulqrom product screenshot must be added before launch |
 | Privacy Policy / T&Cs URLs | Linked to `https://theravenlabs.com/privacy-policy/` and `/terms/` | Assumed these already exist on the main site under these paths — **verify the exact URLs before launch** |
 
@@ -126,9 +126,6 @@ the Mobile-first row below for a bug this caught and fixed (button `whitespace-n
 `min-height`, and adding `min-w-0` to the hero grid children).
 
 **Not yet done — flagged, not silently skipped:**
-- Real Raven Labs logo file — a logo image was shared in chat but could not be extracted from the
-  conversation into a file in this environment (no attachment path found on disk); needs to arrive
-  as an actual file upload to swap into `public/logos/`
 - `public/hero-dashboard.png` — no real product screenshot supplied; `NabersDashboardMock.tsx` (an
   inline SVG mockup) stands in for it
 - `public/og-image.png` — 1200×630 social share image not yet created
@@ -171,7 +168,7 @@ the Mobile-first row below for a bug this caught and fixed (button `whitespace-n
 
 **Copy quality:** ⚠️ Every claim has a proof point — **NO, proof section is placeholder** (❌ blocks launch, see below) · ✅ Zero anonymous testimonials (none shipped — placeholders instead) · ✅ Australian English throughout · ✅ "Fulqrom" and "Raven Labs" capitalised correctly · ✅ No unsupported superlatives · ✅ No throat-clearing filler
 
-**Visual design:** ✅ Brand colours/fonts match brand tokens (via shadcn/ui theme variables) · ⚠️ Logo files are text placeholders, not the real artwork — a real logo was shared in chat but couldn't be saved to disk from this session; needs a file upload (❌ blocks launch) · ✅ WCAG-considered contrast (white text on gradient, dark text on light backgrounds) · ✅ Hero visual is a real on-brand inline SVG dashboard mockup, not a stock photo — still recommended to swap for an actual product screenshot when available · ✅ No carousels/auto-playing video
+**Visual design:** ✅ Brand colours/fonts match brand tokens (via shadcn/ui theme variables) · ✅ Real logo in use (`public/logos/raven-labs-logo.png`, uploaded, cropped, transparent background confirmed) — header uses it directly, footer wraps it in a light chip since the wordmark is black-on-transparent and needs a light backing on the dark footer · ✅ WCAG-considered contrast (white text on gradient, dark text on light backgrounds) · ✅ Hero visual is a real on-brand inline SVG dashboard mockup, not a stock photo — still recommended to swap for an actual product screenshot when available · ✅ No carousels/auto-playing video
 
 **Mobile-first:** ✅ Built mobile-first with Tailwind responsive classes, 48px min tap targets, 16px+ body text · ✅ Verified with a real headless-browser pass at 375/390/768/1440px — `document.scrollWidth === clientWidth` at all four (a horizontal-overflow bug was caught and fixed at this step, see Section 4)
 
@@ -185,7 +182,7 @@ the Mobile-first row below for a bug this caught and fixed (button `whitespace-n
 
 **Form:** ✅ 4 required fields (first name, email, company; phone optional) · ✅ Honeypot field · ⚠️ reCAPTCHA wired but needs a real site key/secret to activate · ✅ Distinct `/thanks` route for conversion tracking
 
-**Overall: NOT READY TO LAUNCH.** Two hard blockers remain — real logo art (a file upload is needed; the pasted image couldn't be saved from chat) and legal/contact details (ABN, phone, email) — plus at least one real proof point (stat or testimonial) strongly recommended before spending ad budget. The hero visual is now a real on-brand SVG mockup rather than a missing placeholder. Everything else is built, verified with a real browser (build, runtime, mobile breakpoints, full interaction flow), and wired.
+**Overall: NOT READY TO LAUNCH.** One hard blocker remains — legal/contact details (ABN, phone, email) — plus at least one real proof point (stat or testimonial) strongly recommended before spending ad budget. The real logo is now wired in and the hero visual is a real on-brand SVG mockup. Everything else is built, verified with a real browser (build, runtime, mobile breakpoints, full interaction flow), and wired.
 
 ---
 
