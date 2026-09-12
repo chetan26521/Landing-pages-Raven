@@ -76,7 +76,7 @@ sign-off before spending budget on it.
 | Headline 3 | Free NABERS Health Check |
 | Description 1 | Stop guessing your NABERS star rating. Fulqrom tracks it continuously — see it live, fix it before assessment day. |
 | Description 2 | Book a free 15-minute health check. No obligation, no hardware to install to find out. |
-| Final URL | `https://nabers-rating.theravenlabs.com/nabers-rating-tracking?utm_source=google&utm_medium=cpc&utm_campaign={_campaign}&utm_term={keyword}&utm_content={_adgroup}_{creative}&gclid={gclid}` |
+| Final URL | `https://nabers-rating-tracking.theravenlabs.com/?utm_source=google&utm_medium=cpc&utm_campaign={_campaign}&utm_term={keyword}&utm_content={_adgroup}_{creative}&gclid={gclid}` — requires the subdomain DNS/Vercel setup in README.md "Per-campaign subdomains"; until that's done, use `https://landing-pages-raven.vercel.app/nabers-rating-tracking?...` instead |
 
 **Ad-to-page message match audit:**
 
@@ -148,7 +148,7 @@ the Mobile-first row below for a bug this caught and fixed (button `whitespace-n
 ## 6. Google Ads Hookup Block
 
 - [ ] Create the campaign/ad group and the ad using the draft in Section 3 (or your revised version)
-- [ ] Set **Final URL** to `https://nabers-rating.theravenlabs.com/nabers-rating-tracking` with the UTM template above
+- [ ] Set **Final URL** to `https://nabers-rating-tracking.theravenlabs.com/` (once the subdomain is live — see README.md "Per-campaign subdomains") with the UTM template above
 - [ ] Set up a **Conversion Action** in Google Ads (Tools & Settings → Conversions) for form submission on `/thanks`
 - [ ] Copy the resulting `AW-XXXXXXXXXX` / conversion label into Vercel env vars (`NEXT_PUBLIC_ADS_ID`, `NEXT_PUBLIC_ADS_CONVERSION_LABEL`)
 - [ ] Confirm the ad's headline matches the page H1 (message-match audit above — re-check if the ad copy changes)

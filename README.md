@@ -75,3 +75,40 @@ This is supported by design, not an afterthought:
   crash, but wrong attribution, so don't skip it.
 - The Google Ads account ID (`NEXT_PUBLIC_ADS_ID`) is shared (one Ads account);
   only the conversion *label* differs per campaign.
+
+## Per-campaign subdomains
+
+Each campaign is reachable two ways:
+- **Path, always works, no setup needed:** `https://landing-pages-raven.vercel.app/<slug>`
+- **Subdomain, needs the one-time setup below:** `https://<slug>.theravenlabs.com/`
+
+`middleware.ts` already does the code-side work — it rewrites a recognised
+subdomain's root path to that campaign's route, transparently (the visitor's
+URL bar stays on the subdomain; Next.js serves the campaign page underneath).
+Currently mapped: `nabers-rating-tracking` and `salesforce-alternative`.
+
+**This only works once a human does two things outside this repo — Claude Code
+has no access to DNS or the Vercel dashboard to do these:**
+
+1. **DNS** — in theravenlabs.com's DNS provider, add one CNAME record per
+   campaign subdomain, pointing at Vercel:
+   ```
+   nabers-rating-tracking.theravenlabs.com   CNAME   cname.vercel-dns.com
+   salesforce-alternative.theravenlabs.com   CNAME   cname.vercel-dns.com
+   ```
+2. **Vercel** — in the `landing-pages-raven` project → Settings → Domains, add
+   each subdomain (`nabers-rating-tracking.theravenlabs.com`,
+   `salesforce-alternative.theravenlabs.com`). Vercel verifies the CNAME and
+   provisions SSL automatically once DNS propagates (usually minutes, can take
+   longer).
+
+Until both of those are done, the subdomains simply won't resolve — the
+path-based URLs keep working the whole time, so nothing breaks in the
+meantime. Point each campaign's Google Ads Final URL at its subdomain root
+once it's confirmed live (`https://nabers-rating-tracking.theravenlabs.com/`,
+not the `/nabers-rating-tracking` path) — that's what each page's canonical
+URL now assumes.
+
+**Adding a new campaign's subdomain later:** add its entry to
+`SUBDOMAIN_TO_CAMPAIGN_PATH` in `middleware.ts`, then repeat the DNS + Vercel
+steps above for that subdomain.

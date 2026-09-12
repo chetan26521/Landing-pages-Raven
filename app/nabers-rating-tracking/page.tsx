@@ -29,8 +29,13 @@ export const metadata: Metadata = {
   title: 'Live NABERS Rating Tracking | Fulqrom by Raven Labs',
   description:
     'Stop guessing your NABERS star rating. Fulqrom tracks it continuously in software — see it live, fix it before assessment day. Book a free health check.',
+  // Canonical is the campaign's own subdomain root, not the path — the
+  // subdomain is what visitors and search engines actually see; middleware.ts
+  // rewrites it to this route server-side, transparently. The path-based URL
+  // (landing-pages-raven.vercel.app/nabers-rating-tracking) still works too,
+  // but shouldn't be indexed as a separate/duplicate URL.
   alternates: {
-    canonical: 'https://nabers-rating.theravenlabs.com/nabers-rating-tracking',
+    canonical: 'https://nabers-rating-tracking.theravenlabs.com/',
   },
   openGraph: {
     title: 'Live NABERS Rating Tracking | Fulqrom by Raven Labs',

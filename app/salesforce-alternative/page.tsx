@@ -32,8 +32,10 @@ export const metadata: Metadata = {
   title: 'Salesforce Alternative for Australian Businesses | Raven Labs',
   description:
     'Comparing Salesforce quotes? See what an Authorised Zoho Partner can build instead — enterprise CRM automation, Australian data hosting, a fraction of the cost.',
+  // Canonical is the campaign's own subdomain root, not the path — see the
+  // matching comment in app/nabers-rating-tracking/page.tsx for why.
   alternates: {
-    canonical: 'https://salesforce-alternative.theravenlabs.com/salesforce-alternative',
+    canonical: 'https://salesforce-alternative.theravenlabs.com/',
   },
   openGraph: {
     title: 'Salesforce Alternative for Australian Businesses | Raven Labs',

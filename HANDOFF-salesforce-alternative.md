@@ -73,7 +73,7 @@ Status: **Draft — ready for human review, not launched**
 | Headline 3 | Free CRM Consultation |
 | Description 1 | Comparing Salesforce quotes? See what Zoho CRM can do instead — enterprise automation, Australian data hosting, migrated by an Authorised Zoho Partner. |
 | Description 2 | Book a free 30-minute CRM consultation. Bring your current Salesforce quote. |
-| Final URL | `https://<domain>/salesforce-alternative?utm_source=google&utm_medium=cpc&utm_campaign={_campaign}&utm_term={keyword}&utm_content={_adgroup}_{creative}&gclid={gclid}` |
+| Final URL | `https://salesforce-alternative.theravenlabs.com/?utm_source=google&utm_medium=cpc&utm_campaign={_campaign}&utm_term={keyword}&utm_content={_adgroup}_{creative}&gclid={gclid}` — requires the subdomain DNS/Vercel setup in README.md "Per-campaign subdomains"; until that's done, use `https://landing-pages-raven.vercel.app/salesforce-alternative?...` instead |
 
 **Ad-to-page message match audit:**
 
@@ -129,7 +129,7 @@ Same project as the NABERS page — no new Vercel project needed.
 ## 6. Google Ads Hookup Block
 
 - [ ] Create the campaign/ad group and the ad using the draft in Section 3 (or your revised version)
-- [ ] Set **Final URL** to `https://<domain>/salesforce-alternative` with the UTM template above
+- [ ] Set **Final URL** to `https://salesforce-alternative.theravenlabs.com/` (once the subdomain is live — see README.md "Per-campaign subdomains") with the UTM template above
 - [ ] Set up a **separate Conversion Action** in Google Ads for this campaign's form submission (do not reuse the NABERS campaign's conversion action)
 - [ ] Copy the resulting conversion label into `NEXT_PUBLIC_ADS_CONVERSION_LABEL_SALESFORCE_ALTERNATIVE` in Vercel
 - [ ] Confirm the ad's headline matches the page H1 (message-match audit above)

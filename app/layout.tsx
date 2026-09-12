@@ -10,20 +10,15 @@ const poppins = Poppins({
   display: 'swap',
 })
 
+// This project hosts multiple campaigns, each with its own subdomain (see
+// middleware.ts + README "Per-campaign subdomains"), so there's no single
+// correct metadataBase for all of them. Every campaign page sets its own
+// absolute canonical/openGraph URLs, which take precedence — this is just a
+// generic fallback for anything that isn't overridden.
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nabers-rating.theravenlabs.com'),
-  title: 'Live NABERS Rating Tracking | Fulqrom by Raven Labs',
-  description:
-    'Fulqrom tracks your NABERS star rating continuously in software. See it live, fix it before assessment day. Book a free NABERS health check.',
-  openGraph: {
-    title: 'Live NABERS Rating Tracking | Fulqrom by Raven Labs',
-    description:
-      'Stop guessing your NABERS star rating. Fulqrom tracks it continuously in software, all year round.',
-    images: ['/og-image.png'],
-    type: 'website',
-    locale: 'en_AU',
-  },
-  twitter: { card: 'summary_large_image' },
+  metadataBase: new URL('https://landing-pages-raven.vercel.app'),
+  title: 'Raven Labs',
+  description: 'Raven Labs — Australian technology and automation consultancy.',
   robots: { index: true, follow: true },
 }
 
