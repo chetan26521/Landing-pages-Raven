@@ -3,9 +3,13 @@
 import { z } from 'zod'
 import { redirect } from 'next/navigation'
 
-// Lead schema for the NABERS Rating Tracking campaign form.
+// Shared lead schema for every campaign page's form in this project.
 // Max 4 required fields for cold PPC traffic, per conversion-checklist.md.
+// `campaign` is required — it's how /thanks knows which page's Google Ads
+// conversion label to fire, now that multiple campaigns run at once. Every
+// campaign page's form MUST include a hidden <input name="campaign" value="<slug>">.
 const LeadSchema = z.object({
+  campaign: z.string().min(1),
   first_name: z.string().min(1),
   email: z.string().email(),
   company: z.string().min(1),
@@ -30,7 +34,7 @@ export async function submitLead(formData: FormData) {
 
   // Honeypot check — silently succeed without sending the lead anywhere.
   if (parsed.data.website) {
-    redirect('/thanks')
+    redirect(`/thanks?campaign=${encodeURIComponent(parsed.data.campaign)}`)
   }
 
   // [[PLACEHOLDER]] — verify reCAPTCHA v3 once RECAPTCHA_SECRET is set.
@@ -53,11 +57,10 @@ export async function submitLead(formData: FormData) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...parsed.data,
-        campaign: 'nabers-rating-tracking',
-        source_page: '/nabers-rating-tracking',
+        source_page: `/${parsed.data.campaign}`,
       }),
     })
   }
 
-  redirect('/thanks')
+  redirect(`/thanks?campaign=${encodeURIComponent(parsed.data.campaign)}`)
 }

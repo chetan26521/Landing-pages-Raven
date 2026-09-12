@@ -1,23 +1,26 @@
 /**
- * Raven Labs / Fulqrom Landing Page — "Live NABERS Rating Tracking"
- * Route: /nabers-rating-tracking
- * Campaign: NABERS Rating Tracking — National Q1 2027
+ * Raven Labs Landing Page — "Salesforce Alternative" (Salesforce → Zoho migration)
+ * Route: /salesforce-alternative
+ * Campaign: Salesforce Alternative — National, Conquesting Q1 2027
  *
- * Built on shadcn/ui primitives (components/ui/*) themed to Raven Labs'
- * brand purple via CSS variables in app/globals.css — see HANDOFF.md for
- * the full research/copy record and Section 1 for what's still assumed.
- * Message-matches the draft Google Ad in HANDOFF.md. Replace every
- * [[PLACEHOLDER]] before launch.
+ * Angle: competitive-conquesting on Salesforce-category search intent, pitching
+ * Raven Labs' real, documented positioning (Authorised Zoho Partner) as the
+ * lower-cost alternative — NOT claiming any Salesforce partnership/credential
+ * Raven doesn't hold. See HANDOFF-salesforce-alternative.md for the full
+ * research record and every [[PLACEHOLDER]] that needs human confirmation
+ * before launch, especially the cost-comparison figures (public list pricing,
+ * needs re-verification against Salesforce's and Zoho's live AU pricing pages —
+ * SaaS pricing changes).
  */
 
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import { CheckCircle2, Gauge, LineChart, ShieldCheck, Sparkles } from 'lucide-react'
+import { ArrowRightLeft, BadgeCheck, MapPin, ShieldCheck } from 'lucide-react'
 
 import { submitLead } from '@/lib/submit-lead'
 import EventTracking from '@/components/EventTracking'
-import NabersDashboardMock from '@/components/NabersDashboardMock'
 import ScrollReveal from '@/components/ScrollReveal'
+import SalesforceCostCompare from '@/components/SalesforceCostCompare'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -26,17 +29,17 @@ import { Label } from '@/components/ui/label'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 export const metadata: Metadata = {
-  title: 'Live NABERS Rating Tracking | Fulqrom by Raven Labs',
+  title: 'Salesforce Alternative for Australian Businesses | Raven Labs',
   description:
-    'Stop guessing your NABERS star rating. Fulqrom tracks it continuously in software — see it live, fix it before assessment day. Book a free health check.',
+    'Comparing Salesforce quotes? See what an Authorised Zoho Partner can build instead — enterprise CRM automation, Australian data hosting, a fraction of the cost.',
   alternates: {
-    canonical: 'https://nabers-rating.theravenlabs.com/nabers-rating-tracking',
+    canonical: 'https://salesforce-alternative.theravenlabs.com/salesforce-alternative',
   },
   openGraph: {
-    title: 'Live NABERS Rating Tracking | Fulqrom by Raven Labs',
+    title: 'Salesforce Alternative for Australian Businesses | Raven Labs',
     description:
-      'Stop guessing your NABERS star rating. Fulqrom tracks it continuously in software, all year round.',
-    images: ['/og-image.png'],
+      'Same CRM automation power as Salesforce, migrated to Zoho by an Authorised Zoho Partner — for a fraction of the licensing cost.',
+    images: ['/og-image-salesforce-alternative.png'],
     type: 'website',
     locale: 'en_AU',
   },
@@ -44,33 +47,30 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-// -----------------------------------------------------------------------------
-// Schema.org — Service + LocalBusiness + FAQPage
-// -----------------------------------------------------------------------------
 const faqs = [
   {
-    q: 'What is a NABERS rating?',
-    a: 'NABERS is a star rating, out of 6, that measures a building’s energy efficiency against government benchmarks using actual 12-month utility consumption data.',
+    q: 'Is Zoho CRM really comparable to Salesforce?',
+    a: 'For most small-to-mid-size Australian businesses, yes — Zoho CRM Enterprise covers workflow automation, custom modules, reporting, and integrations that cover the vast majority of what teams actually use in Salesforce day to day. Very large enterprises with deep Salesforce-specific customisation (heavy Apex code, AppExchange-only integrations) are the exception — we\'ll tell you honestly in your consultation if that\'s your situation.',
   },
   {
-    q: 'Does Fulqrom replace my accredited NABERS assessor?',
-    a: 'No. Fulqrom tracks your rating continuously between assessments so you walk into your next official NABERS assessment with clean data and no surprises. Your accredited assessor still issues the certified rating.',
+    q: 'How much can we actually save switching from Salesforce to Zoho?',
+    a: '[[PLACEHOLDER: re-verify current Salesforce and Zoho AU list pricing before launch]] Based on published list pricing, a 30-user Salesforce Enterprise setup runs materially higher than the equivalent Zoho CRM Enterprise plan — often 70%+ lower licensing cost. Your exact saving depends on your current edition, add-ons, and user count, which is exactly what the free consultation works out.',
   },
   {
-    q: 'How much does Fulqrom cost?',
-    a: 'Pricing depends on your building’s size, meter count, and portfolio. Book a free health check and we’ll scope a fixed quote afterwards — no obligation.',
+    q: 'What happens to our existing Salesforce data, automations and custom objects?',
+    a: 'We map your Salesforce data architecture — custom objects, formula fields, layered automations — to Zoho CRM before a single record moves, so nothing is lost or misaligned during the switch.',
   },
   {
-    q: 'How long does setup take?',
-    a: 'Most buildings are live within two weeks of connecting utility retailer data, meters, or BMS feeds — no hardware replacement required.',
+    q: 'How long does a Salesforce to Zoho migration take?',
+    a: '[[PLACEHOLDER: confirm typical timeline with delivery team before launch]] Most standard migrations run a few weeks; more complex, multi-year Salesforce setups with heavy customisation take longer. We scope the real timeline for your setup in the consultation, not a generic number.',
   },
   {
-    q: 'What buildings does Fulqrom support?',
-    a: 'Commercial office (base building, tenancy, or whole building), shopping centres, hotels, and data centres across Australia.',
+    q: 'Do we lose functionality moving off Salesforce?',
+    a: 'Standard CRM functionality — pipelines, workflow automation, reporting, integrations — carries across. Highly Salesforce-specific customisations (custom Apex logic, certain AppExchange apps) sometimes need to be rebuilt differently in Zoho. We flag anything like that upfront, not after you\'ve switched.',
   },
   {
-    q: 'What if I want to stop using Fulqrom?',
-    a: '[[PLACEHOLDER: confirm contract terms/notice period with Nav before launch — do not publish an unconfirmed cancellation policy.]]',
+    q: "What if we're not sure we want to switch yet?",
+    a: 'That\'s exactly what the free consultation is for — no commitment. Bring your current Salesforce quote and we\'ll give you a straight comparison of cost and capability so you can decide, whether that\'s switching now, later, or not at all.',
   },
 ]
 
@@ -79,9 +79,9 @@ const schemaData = {
   '@graph': [
     {
       '@type': 'Service',
-      name: 'Fulqrom Live NABERS Rating Tracking',
+      name: 'Salesforce to Zoho CRM Migration',
       description:
-        'Continuous, software-based NABERS energy rating tracking for Australian commercial buildings, delivered by Raven Labs.',
+        'CRM migration and implementation service moving Australian businesses from Salesforce to Zoho CRM, delivered by Raven Labs, an Authorised Zoho Partner.',
       areaServed: 'AU',
       provider: {
         '@type': 'LocalBusiness',
@@ -105,7 +105,7 @@ const schemaData = {
         .map((f) => ({
           '@type': 'Question',
           name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
+          acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/^\[\[.*?\]\]\s*/, '') },
         })),
     },
   ],
@@ -113,35 +113,35 @@ const schemaData = {
 
 const benefits = [
   {
-    icon: Gauge,
-    title: 'Live star rating, not a snapshot',
-    body: 'See your NABERS rating trend month to month, not just once a year at assessment time.',
+    icon: ArrowRightLeft,
+    title: 'Up to ~75% lower licensing cost',
+    body: '[[VERIFY current pricing before launch]] Based on published list pricing, Zoho CRM Enterprise runs a fraction of the equivalent Salesforce Enterprise cost for the same seat count.',
   },
   {
-    icon: LineChart,
-    title: 'No manual bill-chasing',
-    body: 'Fulqrom pulls consumption data automatically from meters, BMS, and retailers — no spreadsheets.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Early-warning alerts',
-    body: 'Get notified the moment consumption trends put your rating at risk, with time to act.',
+    icon: MapPin,
+    title: 'Australian data hosting',
+    body: 'Zoho now hosts data in Australia, matching data-sovereignty requirements many Australian businesses need to meet.',
   },
   {
     icon: ShieldCheck,
-    title: 'Audit-ready evidence',
-    body: 'Hand your accredited assessor, tenants, and investors clean, continuous data on demand.',
+    title: 'Nothing lost in the move',
+    body: 'We map your Salesforce objects, fields and automations to Zoho before anything migrates — verified, not guessed.',
+  },
+  {
+    icon: BadgeCheck,
+    title: 'Delivered by an Authorised Zoho Partner',
+    body: 'Raven Labs is an Authorised Zoho Partner — this is our core specialism, not a side service.',
   },
 ]
 
 const steps = [
-  { title: 'Book your health check', body: 'A 15-minute call to understand your building type, meters, and current rating.' },
-  { title: 'Connect your data', body: 'Fulqrom connects to your meters, BMS, and utility retailer feeds — no new hardware.' },
-  { title: 'See your live rating', body: 'Your NABERS star rating updates continuously on the Fulqrom dashboard.' },
-  { title: 'Fix issues early', body: 'Get alerted before consumption trends put your next assessment at risk.' },
+  { title: 'Book your free consultation', body: 'Bring your current Salesforce quote — 30 minutes, no obligation.' },
+  { title: 'We map your Salesforce setup', body: 'Objects, workflows, integrations and automations, audited before anything moves.' },
+  { title: 'We migrate and rebuild in Zoho', body: 'Data integrity checked at every step — nothing silently dropped.' },
+  { title: 'Your team is trained and live', body: 'Onboarding and local support included, not billed as an extra.' },
 ]
 
-export default function NabersRatingTrackingPage() {
+export default function SalesforceAlternativePage() {
   return (
     <>
       <Script
@@ -167,7 +167,7 @@ export default function NabersRatingTrackingPage() {
             <img src="/logos/raven-labs-logo.png" alt="Raven Labs" width={106} height={36} />
           </a>
           <Button asChild size="sm" data-cta="header">
-            <a href="#final-cta">Book my free health check</a>
+            <a href="#final-cta">Book my free CRM consultation</a>
           </Button>
         </div>
       </header>
@@ -177,45 +177,35 @@ export default function NabersRatingTrackingPage() {
             1. HERO
         ============================================ */}
         <section className="relative overflow-hidden bg-raven-gradient text-white">
-          {/* Decorative texture + glow orbs — pure CSS, no image requests */}
           <div className="absolute inset-0 rl-grid-pattern opacity-40" aria-hidden="true" />
-          <div
-            className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl"
-            aria-hidden="true"
-          />
-          <div
-            className="absolute -bottom-32 -right-16 w-[28rem] h-[28rem] rounded-full bg-white/10 blur-3xl"
-            aria-hidden="true"
-          />
+          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl" aria-hidden="true" />
+          <div className="absolute -bottom-32 -right-16 w-[28rem] h-[28rem] rounded-full bg-white/10 blur-3xl" aria-hidden="true" />
 
           <div className="container relative mx-auto grid md:grid-cols-[1.1fr_1fr] gap-10 md:gap-16 items-center py-16 md:py-28">
             <div className="min-w-0">
               <Badge variant="onGradient" className="mb-5">
-                Live software for Australian commercial buildings
+                Authorised Zoho Partner
               </Badge>
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight mb-5">
-                Track Your NABERS Rating Live — Before It Drops, Not After
+                The Salesforce Alternative Australian Businesses Are Switching To
               </h1>
               <p className="text-lg md:text-xl opacity-90 mb-8 max-w-xl">
-                Fulqrom gives Australian commercial building owners and facilities managers a live NABERS
-                star rating, tracked continuously in software — so you catch problems months before your
-                next official assessment, not after.
+                Raven Labs migrates you from Salesforce to Zoho CRM — the same enterprise-grade
+                automation your team relies on, hosted in Australia, for a fraction of the licensing
+                cost.
               </p>
               <div className="flex flex-wrap gap-4 items-center">
                 <Button asChild variant="onGradient" size="lg" data-cta="hero">
                   <a href="#final-cta">
-                    Book my free NABERS health check
+                    Book my free CRM consultation
                     <span aria-hidden="true">→</span>
                   </a>
                 </Button>
-                <span className="text-sm opacity-85">15 minutes. No obligation. See your live rating first.</span>
+                <span className="text-sm opacity-85">30 minutes. No obligation. Bring your current Salesforce quote.</span>
               </div>
             </div>
             <div className="min-w-0 rounded-2xl overflow-hidden shadow-2xl bg-white/10 border border-white/20 p-2 backdrop-blur-sm">
-              <NabersDashboardMock />
-              {/* Stylised on-brand mockup, not a real product screenshot.
-                  [[RECOMMENDED]] — swap for an actual Fulqrom dashboard screenshot once
-                  one is available; real product UI converts better than any mockup. */}
+              <SalesforceCostCompare />
             </div>
           </div>
         </section>
@@ -229,9 +219,7 @@ export default function NabersRatingTrackingPage() {
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Badge variant="secondary">Authorised Zoho Partner</Badge>
               <Badge variant="secondary">Melbourne HQ · National delivery</Badge>
-              <Badge variant="secondary">Fulqrom · NABERS software</Badge>
-              {/* [[PLACEHOLDER]] — add real, permitted client logos once approved by Nav.
-                  Never display a client logo without explicit permission. */}
+              <Badge variant="secondary">Data-mapped migrations</Badge>
             </div>
           </div>
         </div>
@@ -243,14 +231,13 @@ export default function NabersRatingTrackingPage() {
           <section className="rl-section">
             <div className="container mx-auto max-w-3xl text-center">
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                Your NABERS rating is a once-a-year guess — until it isn&apos;t
+                Salesforce pricing rarely stays where it started
               </h2>
               <p className="text-lg text-muted-foreground">
-                Most building owners find out their NABERS star rating has slipped only when the annual
-                assessment comes back low — after a tenant has already asked about it, or a lease clause has
-                already been triggered. Chasing twelve months of utility bills after the fact doesn&apos;t
-                tell you which month, which plant, or which tenancy caused the drop. By then it&apos;s too
-                late to fix it for this rating cycle.
+                Per-seat costs, add-on modules, and implementation consultants stack up fast as your
+                team grows — and renewal time often means another price increase. Many Australian
+                businesses paying enterprise Salesforce fees are running workflows a lighter, more
+                affordable CRM could handle just as well, without the ongoing licensing burden.
               </p>
             </div>
           </section>
@@ -264,12 +251,12 @@ export default function NabersRatingTrackingPage() {
             <div className="container mx-auto">
               <div className="max-w-2xl mx-auto text-center mb-12">
                 <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  Fulqrom turns your NABERS rating into a live number, not an annual surprise
+                  Same CRM power. A fraction of the cost. Migrated properly.
                 </h2>
                 <p className="text-lg text-muted-foreground">
-                  Fulqrom connects to your meters, BMS, and utility retailer data to calculate your NABERS
-                  star rating continuously — so you can see it move, understand why, and act before your
-                  next official assessment.
+                  Raven Labs is an Authorised Zoho Partner — we migrate your Salesforce setup to Zoho
+                  CRM with your automations, custom fields and integrations mapped and verified before
+                  anything moves.
                 </p>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -299,13 +286,13 @@ export default function NabersRatingTrackingPage() {
             <div className="container mx-auto">
               <div className="max-w-2xl mx-auto text-center mb-12">
                 <h2 className="font-display text-3xl md:text-4xl font-bold">
-                  [[PROOF HEADLINE — e.g. "Built on the same data discipline NABERS itself requires"]]
+                  [[PROOF HEADLINE — e.g. "X businesses migrated off Salesforce, zero data lost"]]
                 </h2>
               </div>
 
               {/*
-                [[PLACEHOLDER: request an approved case study and hard number from Nav/Ben before
-                launch — e.g. "X% fewer manual reporting hours" or "Y buildings tracked continuously".
+                [[PLACEHOLDER: request an approved Salesforce-to-Zoho case study and hard number
+                from Nav/Ben before launch — e.g. "X% reduction in CRM spend for [Client]".
                 Do not invent a stat. Google Ads will also flag unverifiable claims.]]
               */}
               <Card className="mb-8 border-dashed border-2">
@@ -313,11 +300,9 @@ export default function NabersRatingTrackingPage() {
                   <p className="text-6xl font-display font-bold text-primary leading-none">[[X%]]</p>
                   <div>
                     <p className="text-xl font-semibold mb-2">
-                      [[STAT DESCRIPTION — e.g. "reduction in manual reporting time for [Client]"]]
+                      [[STAT DESCRIPTION — e.g. "reduction in CRM licensing spend for [Client]"]]
                     </p>
-                    <p className="text-muted-foreground mb-4">
-                      [[Context sentence — 1-2 lines, real and attributable]]
-                    </p>
+                    <p className="text-muted-foreground mb-4">[[Context sentence — 1-2 lines, real and attributable]]</p>
                     <a href="[[case study URL]]" className="text-primary font-semibold hover:underline">
                       Read the full case study →
                     </a>
@@ -325,7 +310,6 @@ export default function NabersRatingTrackingPage() {
                 </CardContent>
               </Card>
 
-              {/* Supporting testimonials — placeholders, never invented quotes */}
               <div className="grid md:grid-cols-3 gap-6">
                 {[1, 2, 3].map((i) => (
                   <Card key={i} className="border-l-4 border-dashed border-l-primary">
@@ -351,10 +335,9 @@ export default function NabersRatingTrackingPage() {
             <div className="container mx-auto">
               <div className="max-w-2xl mx-auto text-center mb-14">
                 <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">How it works</h2>
-                <p className="text-lg text-muted-foreground">Live in two weeks, no hardware replacement required.</p>
+                <p className="text-lg text-muted-foreground">A structured migration, not a guess-and-hope data dump.</p>
               </div>
               <div className="grid md:grid-cols-4 gap-8 relative">
-                {/* Connecting line on desktop */}
                 <div className="hidden md:block absolute top-5 left-[12.5%] right-[12.5%] h-0.5 bg-border" aria-hidden="true" />
                 {steps.map((s, i) => (
                   <ScrollReveal key={i} delay={i * 100} className="relative">
@@ -398,10 +381,10 @@ export default function NabersRatingTrackingPage() {
           <div className="absolute inset-0 rl-grid-pattern opacity-30" aria-hidden="true" />
           <div className="container relative mx-auto max-w-2xl text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              See your live NABERS rating before your next assessment
+              See what Zoho would cost instead of your next Salesforce renewal
             </h2>
             <p className="text-lg opacity-90 mb-8">
-              15 minutes. No obligation. No hardware to install to find out.
+              30 minutes. No obligation. Bring your current Salesforce quote.
             </p>
 
             <form
@@ -450,9 +433,8 @@ export default function NabersRatingTrackingPage() {
                 <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
               </div>
 
-              {/* Which campaign this lead came from — tells /thanks which Google Ads
-                  conversion label to fire. Required now that multiple campaigns run at once. */}
-              <input type="hidden" name="campaign" value="nabers-rating-tracking" />
+              {/* Which campaign this lead came from — required by lib/submit-lead.ts */}
+              <input type="hidden" name="campaign" value="salesforce-alternative" />
 
               {/* Attribution — populated from sessionStorage by EventTracking on page load */}
               <input type="hidden" id="gclid" name="gclid" />
@@ -463,8 +445,7 @@ export default function NabersRatingTrackingPage() {
               <input type="hidden" id="utm_content" name="utm_content" />
 
               <Button type="submit" variant="onGradient" size="lg" data-cta="final" className="mt-1">
-                <CheckCircle2 aria-hidden="true" />
-                Book my free NABERS health check
+                Book my free CRM consultation
               </Button>
               <p className="text-xs opacity-80 text-center">
                 By submitting, you agree to our{' '}
@@ -483,17 +464,13 @@ export default function NabersRatingTrackingPage() {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-[2fr_1fr_1fr] gap-8 mb-8">
             <div>
-              {/* The real logo's wordmark is black-on-transparent, so it needs a light
-                  chip to stay legible on this dark footer — same authentic asset as the
-                  header, not a recoloured or substituted version. */}
               <div className="inline-block bg-white rounded-lg px-3 py-2 mb-4">
                 {/* eslint-disable-next-line @next/next/no-img-element -- small static brand asset, not worth the next/image optimizer */}
                 <img src="/logos/raven-labs-logo.png" alt="Raven Labs" width={106} height={36} />
               </div>
               <p className="text-gray-400 max-w-md">
-                Raven Labs — Australian technology and automation consultancy, and the team behind
-                Fulqrom, live NABERS rating tracking software for commercial buildings. Melbourne HQ,
-                delivering nationally.
+                Raven Labs — Australian technology and automation consultancy, and an Authorised Zoho
+                Partner. Melbourne HQ, delivering nationally.
               </p>
             </div>
             <div>
@@ -523,13 +500,11 @@ export default function NabersRatingTrackingPage() {
                   <a href="https://theravenlabs.com/privacy-policy/" className="hover:text-white">
                     Privacy Policy
                   </a>
-                  {/* [[PLACEHOLDER]] — confirm the real Privacy Policy URL on theravenlabs.com before launch */}
                 </li>
                 <li>
                   <a href="https://theravenlabs.com/terms/" className="hover:text-white">
                     Terms &amp; Conditions
                   </a>
-                  {/* [[PLACEHOLDER]] — confirm the real Terms & Conditions URL before launch */}
                 </li>
               </ul>
             </div>
@@ -541,6 +516,11 @@ export default function NabersRatingTrackingPage() {
               Melbourne, VIC · <a href="mailto:[[EMAIL]]" className="hover:text-white">[[EMAIL]]</a> · [[PHONE]]
             </div>
           </div>
+          <p className="text-xs text-gray-500 mt-4 max-w-3xl">
+            Salesforce is a registered trademark of Salesforce, Inc. Raven Labs is not affiliated with,
+            endorsed by, or a partner of Salesforce, Inc. Pricing comparisons are based on published
+            list pricing at time of writing and may not reflect current rates.
+          </p>
         </div>
       </footer>
     </>
