@@ -1,5 +1,15 @@
 # Handoff — Fulqrom "Live NABERS Rating Tracking" Landing Page
 
+> **Superseded by the Raven Labs Landing Page Studio.** This repo now hosts
+> a multi-campaign platform — see `README.md` for the current architecture
+> and `STATUS.md` for the build/QA report. This file is kept as the
+> original research/copy record for the NABERS campaign, which now lives
+> at `/campaigns/nabers-rating-tracking` (route `/nabers-rating-tracking`
+> redirects there) and as demo campaign data in `lib/store/seed.ts`. Some
+> details below (file layout, deployment model) describe the old
+> single-page build and are no longer current — the research and copy
+> record itself remains accurate.
+
 Campaign: **NABERS Rating Tracking — National Launch**
 Route: `/nabers-rating-tracking`
 Built with: `raven-landing-page-builder` skill (7-phase workflow)

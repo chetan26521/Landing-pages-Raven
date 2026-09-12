@@ -4,3 +4,9 @@ node_modules
 .env
 .vercel
 *.log
+*.tsbuildinfo
+
+# Campaign persistence (lib/store) — auto-seeded with demo campaigns on
+# first run in any environment where the directory is empty. Runtime data,
+# not source; see README.md "Persistence".
+/data/campaigns/*.json

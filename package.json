@@ -1,8 +1,8 @@
 {
-  "name": "raven-labs-nabers-rating-tracking",
+  "name": "raven-landing-page-studio",
   "version": "1.0.0",
   "private": true,
-  "description": "Raven Labs / Fulqrom Google Ads landing page — Live NABERS Rating Tracking campaign",
+  "description": "Raven Labs Landing Page Studio — multi-campaign landing page management and generation platform, deployed as one Vercel project.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

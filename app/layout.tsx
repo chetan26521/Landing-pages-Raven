@@ -11,26 +11,21 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nabers-rating.theravenlabs.com'),
-  title: 'Live NABERS Rating Tracking | Fulqrom by Raven Labs',
-  description:
-    'Fulqrom tracks your NABERS star rating continuously in software. See it live, fix it before assessment day. Book a free NABERS health check.',
-  openGraph: {
-    title: 'Live NABERS Rating Tracking | Fulqrom by Raven Labs',
-    description:
-      'Stop guessing your NABERS star rating. Fulqrom tracks it continuously in software, all year round.',
-    images: ['/og-image.png'],
-    type: 'website',
-    locale: 'en_AU',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://landing.ravenlabs.com'),
+  title: {
+    default: 'Raven Labs Landing Page Studio',
+    template: '%s | Raven Labs',
   },
-  twitter: { card: 'summary_large_image' },
-  robots: { index: true, follow: true },
+  description: 'Multi-campaign landing page management and generation platform for Raven Labs.',
+  // Individual campaign routes (app/campaigns/[slug]) and the internal
+  // /studio app override this per-page via generateMetadata.
+  robots: { index: false, follow: false },
 }
 
 // GA4 / Google Ads IDs — set as real values in Vercel Project Settings → Environment Variables.
-// [[PLACEHOLDER]] until a human supplies the real IDs from Raven Labs' GA4 + Google Ads admin.
+// Absent until a human supplies the real IDs from Raven Labs' GA4 + Google Ads admin — see .env.example.
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID // e.g. G-XXXXXXXXXX
-const ADS_ID = process.env.NEXT_PUBLIC_ADS_ID // e.g. AW-XXXXXXXXXX
+const ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID // e.g. AW-XXXXXXXXXX
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -3,14 +3,15 @@
 import { z } from 'zod'
 import { redirect } from 'next/navigation'
 
-// Lead schema for the NABERS Rating Tracking campaign form.
-// Max 4 required fields for cold PPC traffic, per conversion-checklist.md.
+// Generic lead schema shared by every campaign's conversion form (master
+// spec §32). Campaign attribution travels via hidden fields the section
+// component renders — see components/sections/FinalCta.tsx.
 const LeadSchema = z.object({
   first_name: z.string().min(1),
   email: z.string().email(),
   company: z.string().min(1),
   phone: z.string().optional(),
-  building_type: z.string().optional(),
+  campaign_slug: z.string().min(1),
   utm_source: z.string().optional(),
   utm_medium: z.string().optional(),
   utm_campaign: z.string().optional(),
@@ -28,12 +29,14 @@ export async function submitLead(formData: FormData) {
     throw new Error('Invalid form data')
   }
 
+  const slug = parsed.data.campaign_slug
+
   // Honeypot check — silently succeed without sending the lead anywhere.
   if (parsed.data.website) {
-    redirect('/thanks')
+    redirect(`/campaigns/${slug}/thanks`)
   }
 
-  // [[PLACEHOLDER]] — verify reCAPTCHA v3 once RECAPTCHA_SECRET is set.
+  // reCAPTCHA v3 — only enforced once RECAPTCHA_SECRET is set.
   if (process.env.RECAPTCHA_SECRET && parsed.data.recaptcha_token) {
     const captchaCheck = await fetch('https://www.google.com/recaptcha/api/siteverify', {
       method: 'POST',
@@ -46,18 +49,18 @@ export async function submitLead(formData: FormData) {
     }
   }
 
-  // [[PLACEHOLDER]] — send to Zoho CRM once ZOHO_WEBHOOK_URL is set (server-side env var only).
+  // CRM webhook — only sent once ZOHO_WEBHOOK_URL is set (server-side env var only).
+  // Never claim a lead was delivered to a CRM that isn't actually configured.
   if (process.env.ZOHO_WEBHOOK_URL) {
     await fetch(process.env.ZOHO_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...parsed.data,
-        campaign: 'nabers-rating-tracking',
-        source_page: '/nabers-rating-tracking',
+        source_page: `/campaigns/${slug}`,
       }),
     })
   }
 
-  redirect('/thanks')
+  redirect(`/campaigns/${slug}/thanks`)
 }
